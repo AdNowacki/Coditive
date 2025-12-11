@@ -106,9 +106,9 @@ const submitHandler = async () => {
 
   calculated.value = true;
   try {
+    throw new Error('API call placeholder');
     submitting.value = true;
-  } catch (_e) {
-    // apiError.value = e.message || 'Błąd połączenia z serwerem.';
+  } catch (e) {
   } finally {
     submitting.value = false;
   }

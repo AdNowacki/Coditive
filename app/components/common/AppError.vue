@@ -4,4 +4,12 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  window.addEventListener('error', (event) => {
+    console.error('Global error captured:', event.message);
+  });
+});
+</script>

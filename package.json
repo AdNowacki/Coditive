@@ -14,12 +14,14 @@
     "@libsql/client": "^0.15.15",
     "@nuxt/content": "^3.9.0",
     "@nuxt/eslint": "1.12.1",
+    "@pinia/nuxt": "0.11.3",
     "@tailwindcss/vite": "^4.1.17",
     "better-sqlite3": "^12.5.0",
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
     "eslint": "^9.39.1",
     "nuxt": "^4.2.2",
+    "pinia": "^3.0.4",
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
