@@ -1,4 +1,4 @@
-import tailwindcss from "@tailwindcss/vite"
+import tailwindcss from '@tailwindcss/vite';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -8,10 +8,8 @@ export default defineNuxtConfig({
     compatibilityVersion: 4,
   },
   compatibilityDate: '2024-04-03',
-  css: ['./app/assets/styles/main.scss'],
+  css: ['./app/assets/styles/tailwind.css', './app/assets/styles/main.scss'],
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
-  }
-})
+    plugins: [tailwindcss()],
+  },
+});
