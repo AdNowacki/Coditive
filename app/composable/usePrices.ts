@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue';
 import type { TPriceCalculatorFormModel, TInputError, TPriceDataTable, TPrice } from '~/types';
 import { ENDPOINTS } from '~/constants';
-import { useErrorsStore } from '~/stores/errors';
+import { useErrorsStore } from '~/stores';
 import { removeError } from '~/utils';
 
 const form = ref<TPriceCalculatorFormModel>({

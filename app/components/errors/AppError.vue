@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { useErrorsStore } from '~/stores/errors';
+import { useErrorsStore } from '~/stores';
 
 const errorsStore = useErrorsStore();
 </script>
