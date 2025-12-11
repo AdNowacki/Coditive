@@ -62,8 +62,8 @@
 </template>
 
 <script setup lang="ts">
-import SmartInput from '~/components/Forms/SmartInput.vue';
-import SmartSelect from '~/components/Forms/SmartSelect.vue';
+import SmartInput from '~/components/forms/SmartInput.vue';
+import SmartSelect from '~/components/forms/SmartSelect.vue';
 import CalculatedResult from '~/components/common/CalculatedResult.vue';
 import { INPUT_TYPES_ENUM } from '~/types';
 import { usePriceCalculator } from '~/composable';
