@@ -1,75 +1,19 @@
-# Nuxt Content Starter
+# App
 
-Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
+## How to start
 
-## Setup
+- Install node (v22.20.0)
+- Install yarn
+- Get repository
+- Open the project directory
+- Install dependencies `yarn install`
+- Start developer mode `yarn dev`
 
-Make sure to install dependencies:
+## Tools used:
 
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Nuxt 4
+- Tailwind
+- Pinia
+- TypeScript
+- ESLint
+- Prettier
