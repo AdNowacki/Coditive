@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="props.data.tbody.length" class="overflow-x-auto rounded-lg border border-gray-200 shadow">
+    <div v-if="slots.default" class="overflow-x-auto rounded-lg border border-gray-200 shadow">
       <table class="min-w-full divide-y divide-gray-200">
         <slot></slot>
       </table>
@@ -10,13 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type { TPriceDataTable } from '~/types';
+import { useSlots } from 'vue';
 
-type Props = {
-  data?: TPriceDataTable;
-};
-
-const props = withDefaults(defineProps<Props>(), {
-  data: () => ({ thead: [], tbody: [] }) as TPriceDataTable,
-});
+const slots = useSlots();
 </script>

@@ -47,6 +47,6 @@ export type TPriceRequestBody = {
 export type TPrice = TPriceRequestBody & { id: number; ip: string; createdAt: Date };
 
 export type TPriceDataTable = {
-  thead: string[];
-  tbody: TPrice[];
+  headers: string[];
+  data: TPrice[];
 };

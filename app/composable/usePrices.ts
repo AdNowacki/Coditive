@@ -15,7 +15,7 @@ export const usePrices = () => {
   const inputErrors = ref<TInputError>({});
   const process = ref<boolean>(false);
   const calculated = ref<boolean>(false);
-  const prices = ref<TPriceDataTable>({ thead: [], tbody: [] });
+  const prices = ref<TPriceDataTable>({ headers: [], data: [] });
 
   const vatAmount = computed(() => +formModel.value.net * (+formModel.value.vat / 100));
   const totalAmount = computed(() => +formModel.value.net + vatAmount.value);
@@ -88,8 +88,8 @@ export const usePrices = () => {
       }
 
       prices.value = {
-        thead: ['Nazwa', 'Kwota netto', 'Waluta', 'Stawka VAT', 'Kwota brutto', 'Kwota podatku', 'IP', 'Data'],
-        tbody: data.value as TPrice[],
+        headers: ['Nazwa', 'Kwota netto', 'Waluta', 'Stawka VAT', 'Kwota brutto', 'Kwota podatku', 'IP', 'Data'],
+        data: data.value as TPrice[],
       };
     } catch (error) {
       console.log(error);
