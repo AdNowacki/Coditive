@@ -2,6 +2,7 @@ import { ref, computed } from 'vue';
 import type { TPriceCalculatorFormModel, TInputError, TPriceDataTable, TPrice } from '~/types';
 import { ENDPOINTS } from '~/constants';
 import { useErrorsStore } from '~/stores/errors';
+import { removeError } from '~/utils';
 
 const form = ref<TPriceCalculatorFormModel>({
   name: '',
@@ -34,6 +35,10 @@ export const usePrices = () => {
     calculated.value = false;
     if (!isValid()) return;
 
+    await addPrice();
+  };
+
+  const addPrice = async () => {
     try {
       process.value = true;
       const { METHOD, URL } = ENDPOINTS.CREATE_PRICES;
@@ -54,12 +59,13 @@ export const usePrices = () => {
       if (error.value) {
         const message = 'Wystąpił problem z zapisaniem Twoich danych do bazy.';
         errorsStore.add(message);
+        removeError(() => errorsStore.clear());
         throw new Error(message);
       }
 
       calculated.value = true;
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error(error);
     } finally {
       process.value = false;
     }
@@ -77,6 +83,7 @@ export const usePrices = () => {
       if (error.value) {
         const message = 'Wystąpił problem z pobraniem danych.';
         errorsStore.add(message);
+        removeError(() => errorsStore.clear());
         throw new Error(message);
       }
 
@@ -84,12 +91,24 @@ export const usePrices = () => {
         thead: ['Nazwa', 'Kwota netto', 'Waluta', 'Stawka VAT', 'Kwota brutto', 'Kwota podatku', 'IP', 'Data'],
         tbody: data.value as TPrice[],
       };
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     } finally {
       process.value = false;
     }
   };
 
-  return { form, vatAmount, totalAmount, inputErrors, process, calculated, prices, isValid, submitHandler, getPrices };
+  return {
+    form,
+    vatAmount,
+    totalAmount,
+    inputErrors,
+    process,
+    calculated,
+    prices,
+    isValid,
+    submitHandler,
+    getPrices,
+    addPrice,
+  };
 };
