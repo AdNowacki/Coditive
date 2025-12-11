@@ -15,6 +15,8 @@
 - Nuxt 4
 - Tailwind
 - Pinia
+- Drizzle Orm
+- SQLLite
 - TypeScript
 - ESLint
 - Prettier
