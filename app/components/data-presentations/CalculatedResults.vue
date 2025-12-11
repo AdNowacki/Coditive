@@ -5,10 +5,10 @@
 <script setup lang="ts">
 import { usePrices } from '~/composable';
 
-const { form, vatAmount, totalAmount } = usePrices();
+const { formModel, vatAmount, totalAmount } = usePrices();
 
 const formattedContent = computed(
   () =>
-    `Cena produktu ${form.value.name}, wynosi: ${totalAmount.value.toFixed(2)} zł brutto, kwota podatku to ${vatAmount.value.toFixed(2)} zł.`
+    `Cena produktu ${formModel.value.name}, wynosi: ${totalAmount.value.toFixed(2)} zł brutto, kwota podatku to ${vatAmount.value.toFixed(2)} zł.`
 );
 </script>

@@ -8,7 +8,7 @@
     <div class="mb-4">
       <SmartInput
         id="productName"
-        v-model="form.name"
+        v-model="formModel.name"
         :type="INPUT_TYPES_ENUM.TEXT"
         label="Nazwa produktu"
         placeholder="Wpisz nazwę"
@@ -19,7 +19,7 @@
     <div class="mb-4">
       <SmartInput
         id="netAmount"
-        v-model="form.net"
+        v-model="formModel.net"
         :type="INPUT_TYPES_ENUM.NUMBER"
         :min="0"
         label="Kwota netto"
@@ -31,7 +31,7 @@
     <div class="mb-4">
       <SmartInput
         id="currency"
-        v-model="form.currency"
+        v-model="formModel.currency"
         :type="INPUT_TYPES_ENUM.TEXT"
         label="Waluta"
         placeholder="Wybierz walutę"
@@ -41,7 +41,7 @@
     </div>
 
     <div class="mb-4">
-      <SmartSelect id="vatRate" v-model="form.vat" :options="vatOptions" label="Stawka VAT" />
+      <SmartSelect id="vatRate" v-model="formModel.vat" :options="vatOptions" label="Stawka VAT" />
       <p v-if="inputErrors.vat" class="text-sm text-red-600 mt-1">
         {{ inputErrors.vat }}
       </p>
@@ -78,5 +78,5 @@ const vatOptions = [
   { value: '0', label: '0%' },
 ];
 
-const { form, calculated, process, inputErrors, submitHandler } = usePrices();
+const { formModel, calculated, process, inputErrors, submitHandler } = usePrices();
 </script>

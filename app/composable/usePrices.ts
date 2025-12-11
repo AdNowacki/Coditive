@@ -4,7 +4,7 @@ import { ENDPOINTS } from '~/constants';
 import { useErrorsStore } from '~/stores';
 import { removeError } from '~/utils';
 
-const form = ref<TPriceCalculatorFormModel>({
+const formModel = ref<TPriceCalculatorFormModel>({
   name: '',
   net: '',
   currency: 'PLN',
@@ -17,16 +17,16 @@ export const usePrices = () => {
   const calculated = ref<boolean>(false);
   const prices = ref<TPriceDataTable>({ thead: [], tbody: [] });
 
-  const vatAmount = computed(() => +form.value.net * (+form.value.vat / 100));
-  const totalAmount = computed(() => +form.value.net + vatAmount.value);
+  const vatAmount = computed(() => +formModel.value.net * (+formModel.value.vat / 100));
+  const totalAmount = computed(() => +formModel.value.net + vatAmount.value);
 
   const errorsStore = useErrorsStore();
 
   const isValid = () => {
     inputErrors.value = {};
 
-    if (!form.value.name.trim()) inputErrors.value.name = 'Nazwa produktu jest wymagana.';
-    if (!form.value.net) inputErrors.value.net = 'Kwota netto jest wymagana.';
+    if (!formModel.value.name.trim()) inputErrors.value.name = 'Nazwa produktu jest wymagana.';
+    if (!formModel.value.net) inputErrors.value.net = 'Kwota netto jest wymagana.';
 
     return Object.keys(inputErrors.value).length === 0;
   };
@@ -50,7 +50,7 @@ export const usePrices = () => {
           Authorization: 'Bearer 100923',
         },
         body: {
-          ...form.value,
+          ...formModel.value,
           vatAmount: vatAmount.value,
           totalAmount: totalAmount.value,
         },
@@ -99,7 +99,7 @@ export const usePrices = () => {
   };
 
   return {
-    form,
+    formModel,
     vatAmount,
     totalAmount,
     inputErrors,
