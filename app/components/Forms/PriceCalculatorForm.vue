@@ -50,14 +50,14 @@
     <div class="mb-4">
       <button
         type="submit"
-        class="px-4 py-2 rounded-lg bg-blue-600 transition-all duration-200 text-white font-medium hover:bg-blue-700 w-full"
-        :disabled="submitting"
+        class="px-4 py-2 rounded-lg bg-blue-600 transition-all duration-200 text-white font-medium hover:bg-blue-700 w-full disabled:opacity-50"
+        :disabled="process"
       >
         Oblicz
       </button>
     </div>
 
-    <CalculatedResult v-if="calculated" :data="form" />
+    <CalculatedResult v-if="calculated" />
   </form>
 </template>
 
@@ -66,9 +66,11 @@ import { ref } from 'vue';
 import SmartInput from '~/components/Forms/SmartInput.vue';
 import SmartSelect from '~/components/Forms/SmartSelect.vue';
 import CalculatedResult from '~/components/common/CalculatedResult.vue';
-import type { TPriceCalculatorFormModel, TInputError } from '~/types';
+import type { TInputError } from '~/types';
 import { INPUT_TYPES_ENUM } from '~/types';
+import { ENDPOINTS } from '~/constants';
 import { useErrorsStore } from '~/stores/errors';
+import { usePriceCalculator } from '~/composable';
 
 const vatOptions = [
   { value: '23', label: '23%' },
@@ -81,16 +83,9 @@ const vatOptions = [
 ];
 
 const errorsStore = useErrorsStore();
-
-const form = ref<TPriceCalculatorFormModel>({
-  name: '',
-  net: '',
-  currency: 'PLN',
-  vat: '23',
-});
-
+const { form, vatAmount, totalAmount } = usePriceCalculator();
 const inputErrors = ref<TInputError>({});
-const submitting = ref<boolean>(false);
+const process = ref<boolean>(false);
 const calculated = ref<boolean>(false);
 
 const isValid = () => {
@@ -105,18 +100,37 @@ const isValid = () => {
 const submitHandler = async () => {
   calculated.value = false;
 
-  errorsStore.add('Error message test');
-
   if (!isValid()) return;
-  calculated.value = true;
 
   try {
-    throw new Error('API call placeholder');
-    submitting.value = true;
-  } catch (e) {
-    // apiError.value = e.message || 'Błąd połączenia z serwerem.';
+    process.value = true;
+    const { METHOD, URL } = ENDPOINTS.CREATE_PRICES;
+    const response = await fetch(URL, {
+      method: METHOD,
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer your-token' },
+      body: JSON.stringify({
+        ...form.value,
+        vatAmount: vatAmount.value,
+        totalAmount: totalAmount.value,
+      }),
+    });
+
+    if (!response.ok) {
+      errorsStore.add('Wystąpił problem z zapisaniem Twoich danych do bazy.');
+      throw new Error('Wystąpił problem z zapisaniem Twoich danych do bazy.');
+    }
+
+    calculated.value = true;
+    form.value = {
+      name: '',
+      net: '',
+      currency: 'PLN',
+      vat: '23',
+    };
+  } catch (error: unknown) {
+    console.log(error);
   } finally {
-    submitting.value = false;
+    process.value = false;
   }
 };
 </script>

@@ -10,11 +10,4 @@
 import { useErrorsStore } from '~/stores/errors';
 
 const errorsStore = useErrorsStore();
-
-onMounted(() => {
-  const timer = setInterval(() => {
-    errorsStore.clear();
-    clearTimeout(timer);
-  }, 7000);
-});
 </script>

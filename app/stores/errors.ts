@@ -11,7 +11,7 @@ export const useErrorsStore = defineStore('errors', {
   },
   actions: {
     add(message: string) {
-      this.errors.push(message);
+      if (!this.errors.includes(message)) this.errors.push(message);
     },
     // @TODO implement remove by message
     // remove(index: number) {
