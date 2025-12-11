@@ -121,12 +121,6 @@ const submitHandler = async () => {
     }
 
     calculated.value = true;
-    form.value = {
-      name: '',
-      net: '',
-      currency: 'PLN',
-      vat: '23',
-    };
   } catch (error: unknown) {
     console.log(error);
   } finally {
