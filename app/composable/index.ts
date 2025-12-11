@@ -1,1 +1,1 @@
-export * from './usePriceCalculator';
+export * from './usePrices';

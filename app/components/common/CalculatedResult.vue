@@ -3,9 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { usePriceCalculator } from '~/composable';
+import { usePrices } from '~/composable';
 
-const { form, vatAmount, totalAmount } = usePriceCalculator();
+const { form, vatAmount, totalAmount } = usePrices();
 
 console.log(form.value);
 

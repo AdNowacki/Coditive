@@ -43,3 +43,10 @@ export type TPriceRequestBody = {
   totalAmount: number;
   vatAmount: number;
 };
+
+export type TPrice = TPriceRequestBody & { id: number; ip: string; createdAt: Date };
+
+export type TPriceDataTable = {
+  thead: string[];
+  tbody: TPrice[];
+};

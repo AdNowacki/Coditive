@@ -66,7 +66,7 @@ import SmartInput from '~/components/forms/SmartInput.vue';
 import SmartSelect from '~/components/forms/SmartSelect.vue';
 import CalculatedResult from '~/components/common/CalculatedResult.vue';
 import { INPUT_TYPES_ENUM } from '~/types';
-import { usePriceCalculator } from '~/composable';
+import { usePrices } from '~/composable';
 
 const vatOptions = [
   { value: '23', label: '23%' },
@@ -78,5 +78,5 @@ const vatOptions = [
   { value: '0', label: '0%' },
 ];
 
-const { form, calculated, process, inputErrors, submitHandler } = usePriceCalculator();
+const { form, calculated, process, inputErrors, submitHandler } = usePrices();
 </script>

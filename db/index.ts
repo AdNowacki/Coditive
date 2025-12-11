@@ -14,12 +14,13 @@ if (!tableCheck) {
         net REAL NOT NULL,
         currency TEXT NOT NULL,
         vat REAL NOT NULL,
-        total_amount REAL NOT NULL,
-        vat_amount REAL NOT NULL,
+        totalAmount REAL NOT NULL,
+        vatAmount REAL NOT NULL,
         ip TEXT NOT NULL,
-        created_at TEXT DEFAULT (datetime('now'))
+        createdAt TEXT DEFAULT (datetime('now'))
       );`
     )
     .run();
 }
+
 export const db = drizzle(sqlite, { schema });
