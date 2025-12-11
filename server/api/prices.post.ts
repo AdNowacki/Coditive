@@ -10,7 +10,7 @@ const validationRequest = (body: TPriceRequestBody, token: string) => {
     };
   }
 
-  if (!body || !body.name || !body.net || !body.currency || !body.vat || !body.totalAmount || !body.vatAmount) {
+  if (!body || !body.name || !body.net || !body.currency || !body.vat || !body.totalAmount) {
     return {
       statusCode: 400,
       statusMessage: 'Bad Request',
@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     name: body.name,
     net: +body.net.toFixed(2),
     currency: body.currency,
-    vat: +body.vat,
+    vat: body.vat,
     totalAmount: +body.totalAmount.toFixed(2),
     vatAmount: +body.vatAmount.toFixed(2),
     ip,

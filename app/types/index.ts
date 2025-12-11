@@ -19,7 +19,7 @@ export enum INPUT_TYPES_ENUM {
   BUTTON = 'button',
 }
 
-export type TOptions<T> = {
+export type TOptions<T = string> = {
   value: T;
   label: string;
 };
@@ -39,7 +39,7 @@ export type TPriceRequestBody = {
   name: string;
   net: number;
   currency: string;
-  vat: number;
+  vat: string;
   totalAmount: number;
   vatAmount: number;
 };

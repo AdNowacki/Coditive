@@ -22,7 +22,7 @@ type Props = {
   id?: string;
   label?: string;
   disabled?: boolean;
-  options?: Array<TOptions<string>>;
+  options?: TOptions<string>[];
   errors?: string[];
 };
 

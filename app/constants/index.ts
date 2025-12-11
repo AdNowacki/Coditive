@@ -1,3 +1,5 @@
+import type { TOptions } from '~/types';
+
 export const ENDPOINTS = Object.freeze({
   GET_PRICES: {
     METHOD: 'get',
@@ -17,4 +19,7 @@ export const VAT_OPTIONS = Object.freeze([
   { value: '5', label: '5%' },
   { value: '3', label: '3%' },
   { value: '0', label: '0%' },
-]);
+  { value: 'zw', label: 'zwolnione z VAT' },
+  { value: 'np', label: 'nie podlega VAT' },
+  { value: 'oo', label: 'odwrotne obciązenie' },
+]) as TOptions[];

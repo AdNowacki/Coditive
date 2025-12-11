@@ -6,7 +6,7 @@ export const prices = sqliteTable('prices', {
   name: text('name').notNull(),
   net: real('net').notNull(),
   currency: text('currency').notNull(),
-  vat: real('vat').notNull(),
+  vat: text('vat').notNull(),
   totalAmount: real('totalAmount').notNull(),
   vatAmount: real('vatAmount').notNull(),
   ip: text('ip').notNull(),

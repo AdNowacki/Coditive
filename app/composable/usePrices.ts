@@ -1,8 +1,8 @@
 import { ref, computed } from 'vue';
 import { useErrorsStore } from '~/stores';
 import { removeError } from '~/utils';
-import type { TPriceCalculatorFormModel, TInputError, TPriceDataTable, TPrice } from '~/types';
-import { ENDPOINTS } from '~/constants';
+import type { TPriceCalculatorFormModel, TInputError, TPriceDataTable, TPrice, TOptions } from '~/types';
+import { ENDPOINTS, VAT_OPTIONS } from '~/constants';
 
 const formModel = ref<TPriceCalculatorFormModel>({
   name: '',
@@ -17,10 +17,20 @@ export const usePrices = () => {
   const calculated = ref<boolean>(false);
   const prices = ref<TPriceDataTable>({ headers: [], data: [] });
 
-  const vatAmount = computed(() => +formModel.value.net * (+formModel.value.vat / 100));
+  const vatAmount = computed(() => {
+    const vat = isTaxFree(formModel.value.vat) ? 0 : +formModel.value.vat;
+    return +formModel.value.net * (vat / 100);
+  });
   const totalAmount = computed(() => +formModel.value.net + vatAmount.value);
+  const vatLabelResolver = computed(() => {
+    return isTaxFree(formModel.value.vat)
+      ? (VAT_OPTIONS.find((option: TOptions) => option.value === formModel.value.vat)?.label ?? '')
+      : `${vatAmount.value.toFixed(2)} zł`;
+  });
 
   const errorsStore = useErrorsStore();
+
+  const isTaxFree = (vat: string) => ['oo', 'np', 'zw'].includes(vat);
 
   const isValid = () => {
     inputErrors.value = {};
@@ -106,6 +116,8 @@ export const usePrices = () => {
     process,
     calculated,
     prices,
+    isTaxFree,
+    vatLabelResolver,
     isValid,
     submitHandler,
     getPrices,

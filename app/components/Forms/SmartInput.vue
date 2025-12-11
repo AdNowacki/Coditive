@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { INPUT_TYPES_ENUM } from '~/types';
 
-const model = defineModel<string>({ default: '' });
+const model = defineModel<string | number>({ default: '' });
 
 type Props = {
   id?: string;

@@ -13,7 +13,7 @@ if (!tableCheck) {
         name TEXT NOT NULL,
         net REAL NOT NULL,
         currency TEXT NOT NULL,
-        vat REAL NOT NULL,
+        vat TEXT NOT NULL,
         totalAmount REAL NOT NULL,
         vatAmount REAL NOT NULL,
         ip TEXT NOT NULL,

@@ -5,7 +5,6 @@
         <slot></slot>
       </table>
     </div>
-    <div v-else>Brak danych do wyświetlenia</div>
   </div>
 </template>
 
