@@ -2,7 +2,7 @@ import Database from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 import * as schema from './price-schema';
 
-const sqlite = new Database('app.db');
+const sqlite = new Database('db/app.db');
 
 const tableCheck = sqlite.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='prices';").get();
 if (!tableCheck) {
