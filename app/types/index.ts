@@ -23,3 +23,14 @@ export type TOptions<T> = {
   value: T;
   label: string;
 };
+
+export type TPriceCalculatorFormModel = {
+  name: string;
+  net: string;
+  currency: string;
+  vat: string;
+};
+
+export type TInputError = {
+  [key: string]: string;
+};

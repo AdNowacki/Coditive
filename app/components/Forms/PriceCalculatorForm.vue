@@ -1,7 +1,7 @@
 <template>
   <form
-    class="max-w-md mx-auto p-6 bg-white rounded-xl shadow-md border border-gray-200 text-gray-800"
-    @submit.prevent="handleSubmit"
+    class="max-w-md mx-auto p-6 rounded-xl shadow-md border border-gray-200 text-gray-800"
+    @submit.prevent="submitHandler"
   >
     <h2 class="text-2xl font-semibold mb-4">Formularz: oblicz kwotę brutto</h2>
 
@@ -9,10 +9,10 @@
       <SmartInput
         id="productName"
         v-model="form.name"
-        type="text"
+        :type="INPUT_TYPES_ENUM.TEXT"
         label="Nazwa produktu"
         placeholder="Wpisz nazwę"
-        :errors="[inputErrors.name]"
+        :errors="[inputErrors.name as string]"
       />
     </div>
 
@@ -20,11 +20,11 @@
       <SmartInput
         id="netAmount"
         v-model="form.net"
-        type="number"
-        min="0"
+        :type="INPUT_TYPES_ENUM.NUMBER"
+        :min="0"
         label="Kwota netto"
         placeholder="0.00"
-        :errors="[inputErrors.net]"
+        :errors="[inputErrors.net as string]"
       />
     </div>
 
@@ -32,11 +32,11 @@
       <SmartInput
         id="currency"
         v-model="form.currency"
-        type="text"
-        label="Kwota netto"
+        :type="INPUT_TYPES_ENUM.TEXT"
+        label="Waluta"
         placeholder="Wybierz walutę"
         disabled
-        :errors="[inputErrors.currency]"
+        :errors="[inputErrors.currency as string]"
       />
     </div>
 
@@ -56,13 +56,18 @@
         Oblicz
       </button>
     </div>
+
+    <CalculatedResult v-if="calculated" :data="form" />
   </form>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import SmartInput from '~/components/Forms/SmartInput.vue';
 import SmartSelect from '~/components/Forms/SmartSelect.vue';
+import CalculatedResult from '~/components/common/CalculatedResult.vue';
+import type { TPriceCalculatorFormModel, TInputError } from '~/types';
+import { INPUT_TYPES_ENUM } from '~/types';
 
 const vatOptions = [
   { value: '23', label: '23%' },
@@ -74,13 +79,38 @@ const vatOptions = [
   { value: '0', label: '0%' },
 ];
 
-const form = ref({
+const form = ref<TPriceCalculatorFormModel>({
   name: '',
   net: '',
   currency: 'PLN',
   vat: '23',
 });
 
-const inputErrors = ref({});
-const apiError = ref('');
+const inputErrors = ref<TInputError>({});
+const submitting = ref<boolean>(false);
+const calculated = ref<boolean>(false);
+
+const isValid = () => {
+  inputErrors.value = {};
+
+  if (!form.value.name.trim()) inputErrors.value.name = 'Nazwa produktu jest wymagana.';
+  if (!form.value.net) inputErrors.value.net = 'Kwota netto jest wymagana.';
+
+  return Object.keys(inputErrors.value).length === 0;
+};
+
+const submitHandler = async () => {
+  calculated.value = false;
+
+  if (!isValid()) return;
+
+  calculated.value = true;
+  try {
+    submitting.value = true;
+  } catch (_e) {
+    // apiError.value = e.message || 'Błąd połączenia z serwerem.';
+  } finally {
+    submitting.value = false;
+  }
+};
 </script>
