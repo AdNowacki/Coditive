@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import DataTable from '~/components/common/DataTable.vue';
+import DataTable from '~/components/data-presentations/DataTable.vue';
 import { usePrices } from '~/composable';
 
 const { process, prices, getPrices } = usePrices();
