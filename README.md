@@ -8,6 +8,7 @@
 - Open the project directory
 - Install dependencies `yarn install`
 - Start developer mode `yarn dev`
+- Available pages: `/` and `/prices`
 
 ## Tools used:
 
