@@ -1,0 +1,37 @@
+{
+  "name": "coditive",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint --ext .js,.ts,.vue",
+    "lint:fix": "eslint --ext .js,.ts,.vue . --fix"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.15.15",
+    "@nuxt/content": "^3.9.0",
+    "@nuxt/eslint": "1.12.1",
+    "@tailwindcss/vite": "^4.1.17",
+    "better-sqlite3": "^12.5.0",
+    "drizzle-kit": "^0.31.8",
+    "drizzle-orm": "^0.45.1",
+    "eslint": "^9.39.1",
+    "nuxt": "^4.2.2",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@eslint/css": "^0.14.1",
+    "@eslint/js": "^9.39.1",
+    "@eslint/json": "^0.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.6.2",
+    "globals": "^16.5.0",
+    "jiti": "^2.6.1",
+    "prettier": "3.7.4",
+    "sass-embedded": "^1.96.0",
+    "typescript-eslint": "^8.49.0"
+  }
+}
