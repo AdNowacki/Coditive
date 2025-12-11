@@ -4,6 +4,11 @@ export const useErrorsStore = defineStore('errors', {
   state: () => ({
     errors: [] as string[],
   }),
+  getters: {
+    hasErrors(state): boolean {
+      return state.errors.length > 0;
+    },
+  },
   actions: {
     add(message: string) {
       this.errors.push(message);

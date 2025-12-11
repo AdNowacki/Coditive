@@ -68,6 +68,7 @@ import SmartSelect from '~/components/Forms/SmartSelect.vue';
 import CalculatedResult from '~/components/common/CalculatedResult.vue';
 import type { TPriceCalculatorFormModel, TInputError } from '~/types';
 import { INPUT_TYPES_ENUM } from '~/types';
+import { useErrorsStore } from '~/stores/errors';
 
 const vatOptions = [
   { value: '23', label: '23%' },
@@ -78,6 +79,8 @@ const vatOptions = [
   { value: '3', label: '3%' },
   { value: '0', label: '0%' },
 ];
+
+const errorsStore = useErrorsStore();
 
 const form = ref<TPriceCalculatorFormModel>({
   name: '',
@@ -102,13 +105,16 @@ const isValid = () => {
 const submitHandler = async () => {
   calculated.value = false;
 
-  if (!isValid()) return;
+  errorsStore.add('Error message test');
 
+  if (!isValid()) return;
   calculated.value = true;
+
   try {
     throw new Error('API call placeholder');
     submitting.value = true;
   } catch (e) {
+    // apiError.value = e.message || 'Błąd połączenia z serwerem.';
   } finally {
     submitting.value = false;
   }
