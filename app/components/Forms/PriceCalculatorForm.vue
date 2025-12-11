@@ -62,14 +62,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import SmartInput from '~/components/Forms/SmartInput.vue';
 import SmartSelect from '~/components/Forms/SmartSelect.vue';
 import CalculatedResult from '~/components/common/CalculatedResult.vue';
-import type { TInputError } from '~/types';
 import { INPUT_TYPES_ENUM } from '~/types';
-import { ENDPOINTS } from '~/constants';
-import { useErrorsStore } from '~/stores/errors';
 import { usePriceCalculator } from '~/composable';
 
 const vatOptions = [
@@ -82,49 +78,5 @@ const vatOptions = [
   { value: '0', label: '0%' },
 ];
 
-const errorsStore = useErrorsStore();
-const { form, vatAmount, totalAmount } = usePriceCalculator();
-const inputErrors = ref<TInputError>({});
-const process = ref<boolean>(false);
-const calculated = ref<boolean>(false);
-
-const isValid = () => {
-  inputErrors.value = {};
-
-  if (!form.value.name.trim()) inputErrors.value.name = 'Nazwa produktu jest wymagana.';
-  if (!form.value.net) inputErrors.value.net = 'Kwota netto jest wymagana.';
-
-  return Object.keys(inputErrors.value).length === 0;
-};
-
-const submitHandler = async () => {
-  calculated.value = false;
-
-  if (!isValid()) return;
-
-  try {
-    process.value = true;
-    const { METHOD, URL } = ENDPOINTS.CREATE_PRICES;
-    const response = await fetch(URL, {
-      method: METHOD,
-      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer your-token' },
-      body: JSON.stringify({
-        ...form.value,
-        vatAmount: vatAmount.value,
-        totalAmount: totalAmount.value,
-      }),
-    });
-
-    if (!response.ok) {
-      errorsStore.add('Wystąpił problem z zapisaniem Twoich danych do bazy.');
-      throw new Error('Wystąpił problem z zapisaniem Twoich danych do bazy.');
-    }
-
-    calculated.value = true;
-  } catch (error: unknown) {
-    console.log(error);
-  } finally {
-    process.value = false;
-  }
-};
+const { form, calculated, process, inputErrors, submitHandler } = usePriceCalculator();
 </script>
