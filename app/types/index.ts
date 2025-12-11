@@ -34,3 +34,12 @@ export type TPriceCalculatorFormModel = {
 export type TInputError = {
   [key: string]: string;
 };
+
+export type TPriceRequestBody = {
+  name: string;
+  net: number;
+  currency: string;
+  vat: number;
+  totalAmount: number;
+  vatAmount: number;
+};

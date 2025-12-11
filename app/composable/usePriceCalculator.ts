@@ -37,24 +37,29 @@ export const usePriceCalculator = () => {
     try {
       process.value = true;
       const { METHOD, URL } = ENDPOINTS.CREATE_PRICES;
-      const response = await fetch(URL, {
-        method: METHOD,
-        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer your-token' },
-        body: JSON.stringify({
+
+      const { error } = await useFetch(URL, {
+        method: METHOD as 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer 100923',
+        },
+        body: {
           ...form.value,
           vatAmount: vatAmount.value,
           totalAmount: totalAmount.value,
-        }),
+        },
       });
 
-      if (!response.ok) {
+      if (error.value) {
         errorsStore.add('Wystąpił problem z zapisaniem Twoich danych do bazy.');
         throw new Error('Wystąpił problem z zapisaniem Twoich danych do bazy.');
       }
 
+      // jeśli brak błędu, oznacz jako policzone
       calculated.value = true;
-    } catch (error: unknown) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     } finally {
       process.value = false;
     }
