@@ -8,3 +8,13 @@ export const ENDPOINTS = Object.freeze({
     URL: '/api/prices',
   },
 });
+
+export const VAT_OPTIONS = Object.freeze([
+  { value: '23', label: '23%' },
+  { value: '22', label: '22%' },
+  { value: '8', label: '8%' },
+  { value: '7', label: '7%' },
+  { value: '5', label: '5%' },
+  { value: '3', label: '3%' },
+  { value: '0', label: '0%' },
+]);

@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TPrice } from '~/types';
 import { isoToYMD } from '~/utils';
+import type { TPrice } from '~/types';
 
 type Props = {
   data?: TPrice[];

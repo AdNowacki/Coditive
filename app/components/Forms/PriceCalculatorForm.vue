@@ -41,7 +41,7 @@
     </div>
 
     <div class="mb-4">
-      <SmartSelect id="vatRate" v-model="formModel.vat" :options="vatOptions" label="Stawka VAT" />
+      <SmartSelect id="vatRate" v-model="formModel.vat" :options="VAT_OPTIONS" label="Stawka VAT" />
       <p v-if="inputErrors.vat" class="text-sm text-red-600 mt-1">
         {{ inputErrors.vat }}
       </p>
@@ -65,18 +65,9 @@
 import SmartInput from '~/components/forms/SmartInput.vue';
 import SmartSelect from '~/components/forms/SmartSelect.vue';
 import CalculatedResults from '~/components/data-presentations/CalculatedResults.vue';
-import { INPUT_TYPES_ENUM } from '~/types';
 import { usePrices } from '~/composable';
-
-const vatOptions = [
-  { value: '23', label: '23%' },
-  { value: '22', label: '22%' },
-  { value: '8', label: '8%' },
-  { value: '7', label: '7%' },
-  { value: '5', label: '5%' },
-  { value: '3', label: '3%' },
-  { value: '0', label: '0%' },
-];
+import { INPUT_TYPES_ENUM } from '~/types';
+import { VAT_OPTIONS } from '~/constants';
 
 const { formModel, calculated, process, inputErrors, submitHandler } = usePrices();
 </script>

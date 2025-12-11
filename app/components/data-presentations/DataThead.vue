@@ -16,6 +16,7 @@
 type Props = {
   headers?: string[];
 };
+
 const props = withDefaults(defineProps<Props>(), {
   headers: () => [],
 });

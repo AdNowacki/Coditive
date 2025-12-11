@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import type { TOptions } from '~/types';
+
 const model = defineModel<string>({ default: '' });
 
 type Props = {
